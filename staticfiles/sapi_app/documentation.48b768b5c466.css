@@ -1,0 +1,29 @@
+body {
+  background-color: #eee !important;
+  text-align: center;
+}
+
+body > * {
+  padding: 80px 0;
+}
+
+.api-link {
+  background-color: #ddd;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  padding: 2.5px 7.5px;
+  display: inline-block;
+}
+
+th, td {
+  padding: 10px 15px;
+}
+
+.request-type:not(:last-child) {
+  border-bottom: 2px solid #ccc;
+  padding: 50px 0;
+}
+
+.delete {
+  padding-top: 50px;
+}
