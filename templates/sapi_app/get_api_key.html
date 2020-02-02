@@ -17,8 +17,11 @@
       {% csrf_token %}
       <div class="input-grid">
         <input class="form-control" type="email" name="email" placeholder="Email" required>
-        <input class="btn btn-outline-success" type="submit" value="Get my API Key!">
+        <input class="btn btn-outline-info" type="submit" value="Get my API Key!">
       </div>
     </form>
   </div>
+  <script>
+    document.querySelector(".navbar").className = "navbar navbar-expand-md fixed-top navbar-light"
+  </script>
 {% endblock %}

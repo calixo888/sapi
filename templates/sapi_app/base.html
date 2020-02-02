@@ -17,13 +17,16 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
     <!-- Bootstrap theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+    <link rel="icon" href="{% static 'img/logo.png' %}">
     <link rel="stylesheet" href="{% static 'sapi_app/base.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="/">SAPI</a>
+            <a class="navbar-brand" href="/">
+              <img style="width: 50px;" src="{% static 'img/logo.png' %}" alt="SAPI Logo">
+            </a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar-target">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -39,7 +42,7 @@
                       <a class="nav-link" href="/forgot-api-key/">Forgot your API Key?</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link btn btn-success text-white ml-3" href="/get-api-key/">Get API Key</a>
+                      <a class="nav-link btn btn-info text-white ml-3" href="/get-api-key/">Get API Key</a>
                   </li>
               </ul>
             </div>
