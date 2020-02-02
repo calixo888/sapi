@@ -11,6 +11,9 @@ import string
 import json
 import requests
 
+api_counter_counted = False
+record_counter_counted = False
+
 # Generates a random API key
 def generate_key(length):
     return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(length))
@@ -37,11 +40,11 @@ def index(request):
 
             return HttpResponseRedirect("/")
 
-    metric_data = requests.get("http://www.sapi.host/api/personal/?apikey=KX05BGUSM5OD9VP3K2J7").json()["0gNM9p6a5P"]
-    print(metric_data)
     return render(request, "sapi_app/index.html", context={
-        "api_counter": metric_data["api-counter"],
-        "total_records": metric_data["total-records"]
+        # "api_counter": metric_data["api-counter"],
+        # "total_records": metric_data["total-records"]
+        "api_counter": 324,
+        "total_records": 25
     })
 
 
@@ -94,16 +97,11 @@ def get_api_key(request):
 
 @csrf_exempt
 def personal_storage(request):
-    new_data = requests.get("http://www.sapi.host/api/personal/?apikey=KX05BGUSM5OD9VP3K2J7").json()["0gNM9p6a5P"]
-    new_data["api-counter"] += 1
-    requests.put("http://www.sapi.host/api/personal/?apikey=KX05BGUSM5OD9VP3K2J7&id=0gNM9p6a5P", data=new_data)
     if request.GET.get("apikey"):
         apikey = request.GET.get("apikey")
 
         # POST REQUEST
         if request.method == "POST":
-            new_data["total-records"] += 1
-            requests.put("http://www.sapi.host/api/personal/?apikey=KX05BGUSM5OD9VP3K2J7&id=0gNM9p6a5P", data=new_data)
             json_data = list(dict(QueryDict(request.body)).keys())[0]
             json_string = str(json_data)
             models.JSONRecord.objects.create(record_id=generate_key(10), json_string=json_string, user_api_key=apikey)
@@ -156,8 +154,6 @@ def personal_storage(request):
 
         # PUT REQUEST
         elif request.method == "PUT":
-            new_data["total-records"] += 1
-            requests.put("http://www.sapi.host/api/personal/?apikey=KX05BGUSM5OD9VP3K2J7&id=0gNM9p6a5P", data=new_data)
             if request.GET.get("id"):
                 id = request.GET.get("id")
                 if models.JSONRecord.objects.filter(user_api_key=apikey, record_id=id).exists():
