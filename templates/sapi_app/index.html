@@ -3,7 +3,87 @@
 {% block head %}
   <title>SAPI</title>
   <link rel="stylesheet" href="{% static 'sapi_app/index.css' %}">
+  <link rel="stylesheet" href="http://github.hubspot.com/odometer/themes/odometer-theme-default.css" />
+  <script src="http://github.hubspot.com/odometer/odometer.js"></script>
 {% endblock %}
 {% block body %}
-  <h1>Index</h1>
+  <section class="header">
+    <div class="center-container">
+      <h1 class="f-65">SAPI</h1>
+      <h3 style="font-size: 40px;" class="my-3">Storage API</h3>
+      <h5>A completely free API service to store sample data for prototyping and test data, as well as single-variable metrics.</h5>
+      <div class="metrics">
+        <span><span id="odometer1" class="odometer">0</span> API Calls Made</span>
+        <span><span id="odometer2" class="odometer">0</span> Records Uploaded</span>
+      </div>
+      <form class="w-100" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div class="input-grid">
+          <input class="form-control" type="email" name="email" placeholder="Email" required>
+          <input class="btn btn-outline-light" type="submit" value="Get my API Key!">
+        </div>
+      </form>
+    </div>
+  </section>
+  <section class="about">
+    <h1 class="header-primary text-center">About GroceryPricerAPI</h1>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="text-center">
+          <img src="{% static 'img/icons/dollar.png' %}" class="about-card-icon">
+        </div>
+        <h3 class="header-primary">Easy to Use</h3>
+        <p class="about-card-description">
+          SAPI is an extremely easy to use API. We only have one API route, and allow for 4 HTTP requests. We allow GET, POST, PUT, and DELETE requests.
+        </p>
+      </div>
+      <div class="about-card">
+        <div class="text-center">
+          <img src="{% static 'img/icons/like.png' %}" class="about-card-icon">
+        </div>
+        <h3 class="header-primary">Completely Free</h3>
+        <p class="about-card-description">
+          SAPI is completely free, and we will not charge you to create an API key or to make API calls. We want to make this storage easy to use and convenient for all our users.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="get-started-banner">
+    <h1 class="header-secondary">Get Started!</h1>
+    <form class="w-75" enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-sm px-1">
+          <input class="form-control" type="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="col-sm px-1">
+          <input class="btn btn-outline-light" type="submit" value="Get my API Key!">
+        </div>
+      </div>
+    </form>
+  </section>
+  <section class="contact text-center">
+    <h1 class="header-primary">Let's get in touch!</h1>
+    <p class="w-50 m-auto">
+      We are happy to speak with you about any problems or feedback that you have! We guarantee a response within 24 hours!
+    </p>
+    <div class="my-4"></div>
+    <a href="mailto:grocerymeals.team@gmail.com">
+      <img class="mail-icon" src="{% static 'img/mail.png' %}" alt="Mail Icon">
+    </a>
+    <br>
+    <a class="email-link" href="mailto:grocerymeals.team@gmail.com">grocerymeals.team@gmail.com</a>
+  </section>
+  <div class="text-center" style="background-color: #eee;">
+    <small>&copy; Created and mainted by Calix Huang. All rights reserved.</small>
+  </div>
+  <script>
+    setTimeout(function(){
+        odometer1.innerHTML = {{api_counter}};
+    }, 1000);
+
+    setTimeout(function(){
+        odometer2.innerHTML = {{total_records}};
+    }, 1000);
+  </script>
 {% endblock %}

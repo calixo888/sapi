@@ -9,6 +9,7 @@ from django.http import QueryDict
 import random
 import string
 import json
+import requests
 
 # Generates a random API key
 def generate_key(length):
@@ -16,7 +17,32 @@ def generate_key(length):
 
 
 def index(request):
-    return render(request, "sapi_app/index.html")
+    if request.method == "POST":
+        email = request.POST.get("email")
+
+        if models.APIKey.objects.filter(email=email).exists():
+            messages.error(request, "That email is already taken. Please use a different email.")
+        else:
+            # Generating API key
+            apikey = generate_key(20)
+
+            # Saving to database
+            models.APIKey.objects.create(email=email, apikey=apikey)
+
+            # Sending API Key to email
+            EmailMessage("SAPI API Key", "Thank you for using SAPI!\n\nYour API Key is " + apikey + ". Be sure to save it safely and not forget it.", to=[email]).send()
+
+            # Sending message
+            messages.success(request, "Your API key has been sent to " + email + "!")
+
+            return HttpResponseRedirect("/")
+
+    metric_data = requests.get("http://" + request.META["HTTP_HOST"] + "/api/personal/?apikey=KX05BGUSM5OD9VP3K2J7").json()["0gNM9p6a5P"]
+    print(metric_data)
+    return render(request, "sapi_app/index.html", context={
+        "api_counter": metric_data["api-counter"],
+        "total_records": metric_data["total-records"]
+    })
 
 
 def forgot_api_key(request):
@@ -68,11 +94,16 @@ def get_api_key(request):
 
 @csrf_exempt
 def personal_storage(request):
+    new_data = requests.get("http://" + request.META["HTTP_HOST"] + "/api/personal/?apikey=KX05BGUSM5OD9VP3K2J7").json()["0gNM9p6a5P"]
+    new_data["api-counter"] += 1
+    requests.put("http://" + request.META["HTTP_HOST"] + "/api/personal/?apikey=KX05BGUSM5OD9VP3K2J7&id=0gNM9p6a5P", data=new_data)
     if request.GET.get("apikey"):
         apikey = request.GET.get("apikey")
 
         # POST REQUEST
         if request.method == "POST":
+            new_data["total-records"] += 1
+            requests.put("http://" + request.META["HTTP_HOST"] + "/api/personal/?apikey=KX05BGUSM5OD9VP3K2J7&id=0gNM9p6a5P", data=new_data)
             json_data = list(dict(QueryDict(request.body)).keys())[0]
             json_string = str(json_data)
             models.JSONRecord.objects.create(record_id=generate_key(10), json_string=json_string, user_api_key=apikey)
@@ -125,6 +156,8 @@ def personal_storage(request):
 
         # PUT REQUEST
         elif request.method == "PUT":
+            new_data["total-records"] += 1
+            requests.put("http://" + request.META["HTTP_HOST"] + "/api/personal/?apikey=KX05BGUSM5OD9VP3K2J7&id=0gNM9p6a5P", data=new_data)
             if request.GET.get("id"):
                 id = request.GET.get("id")
                 if models.JSONRecord.objects.filter(user_api_key=apikey, record_id=id).exists():
