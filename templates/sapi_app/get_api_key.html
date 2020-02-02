@@ -1,0 +1,24 @@
+{% extends 'sapi_app/base.html' %}
+{% load staticfiles %}
+{% block head %}
+  <title>SAPI - Get Your Free API Key</title>
+  <link rel="stylesheet" href="{% static 'sapi_app/api_key.css' %}">
+  <meta name="description" content="Get your free API key for the only food API out there now! Access real meal prices from popular grocery stores now!">
+{% endblock %}
+{% block body %}
+  <div class="container text-center">
+    <h1>Get API key</h1>
+    <div class="my-4"></div>
+    <p class="w-50 m-auto">
+      Thank you so much for taking interest in GroceryPricerAPI! Just enter your email below and an API key will be generated and sent to you directly. Be sure not to lose it!
+    </p>
+    <div class="my-4"></div>
+    <form class="w-50 m-auto" enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+      <div class="input-grid">
+        <input class="form-control" type="email" name="email" placeholder="Email" required>
+        <input class="btn btn-outline-success" type="submit" value="Get my API Key!">
+      </div>
+    </form>
+  </div>
+{% endblock %}

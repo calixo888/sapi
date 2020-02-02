@@ -1,0 +1,206 @@
+{% extends 'sapi_app/base.html' %}
+{% load staticfiles %}
+{% block head %}
+  <title>SAPI - API Documentation</title>
+  <link rel="stylesheet" href="{% static 'sapi_app/documentation.css' %}">
+  <meta name="description" content="SAPI's documentation is the simplest documentation you will ever read, so what are you waiting for?">
+{% endblock %}
+{% block body %}
+  <div class="container">
+    <h1 class="header-primary text-center">API Documentation</h1>
+    <div class="request-type get">
+      <h2>GET Request</h2>
+      <p class="api-link" style="background-color: #333; color: white;"><span style="color: var(--color-primary) !important; font-weight: bold;">GET</span> http://www.sapi.host/personal</p>
+      <br>
+      <div class="mb-4 mt-2">
+        <h5 class="d-inline">HTTP Request Description:</h5>
+        <span>
+          The GET request will be able to retrieve all of the stored records that are specific to your API key.
+        </span>
+      </div>
+      <div class="mb-3">
+        <h5 class="d-inline-block">Request Body Data:</h5>
+        <span>
+          No request body data required.
+        </span>
+      </div>
+      <div>
+        <h5 class="d-inline-block">Response Headers:</h5> <p class="api-link">Content-Type: application/json</p>
+      </div>
+      <div>
+        <h5>Query Parameters</h5>
+        <p>NOTE: None of these parameters are required in this API call.</p>
+        <table class="parameters-table">
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Example</th>
+              <th>Default</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><span class="api-link">apikey</span></td>
+              <td>string</td>
+              <td>No example available</td>
+              <td>null</td>
+              <td>Yes</td>
+              <td>This is the only form of authentication for this API. If you do not have one, please get one <a href="/get-api-key/">here</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h5 class=mt-4>Example API Call</h5>
+      <p class="api-link" style="background-color: #333; color: white;"><span style="color: var(--color-primary) !important; font-weight: bold;">GET</span> http://www.sapi.host/api/products/?apikey={apikey}&provider=safeway&limit=50</p>
+    </div>
+    <div class="request-type post">
+      <h2>POST Request</h2>
+      <p class="api-link" style="background-color: #333; color: white;"><span style="color: var(--color-primary) !important; font-weight: bold;">POST</span> http://www.sapi.host/personal</p>
+      <br>
+      <div class="mb-4 mt-2">
+        <h5 class="d-inline">HTTP Request Description:</h5>
+        <span>
+          The POST request will be able to upload and store the data provided in the request body.
+        </span>
+      </div>
+      <div class="mb-3">
+        <h5 class="d-inline-block">Request Body Data:</h5>
+        <span>
+          JSON object of data you want to upload.
+        </span>
+      </div>
+      <div>
+        <h5 class="d-inline-block">Response Headers:</h5> <p class="api-link">Content-Type: application/json</p>
+      </div>
+      <h5>Query Parameters</h5>
+      <p>NOTE: None of these parameters are required in this API call.</p>
+      <table class="parameters-table">
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Example</th>
+            <th>Default</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><span class="api-link">apikey</span></td>
+            <td>string</td>
+            <td>No example available</td>
+            <td>null</td>
+            <td>Yes</td>
+            <td>This is the only form of authentication for this API. If you do not have one, please get one <a href="/get-api-key/">here</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class=mt-4>Example API Call</h5>
+      <p class="api-link" style="background-color: #333; color: white;"><span style="color: var(--color-primary) !important; font-weight: bold;">POST</span> http://www.sapi.host/api/products/?apikey={apikey}&provider=safeway&limit=50</p>
+    </div>
+    <div class="request-type put">
+      <h2>PUT Request</h2>
+      <p class="api-link" style="background-color: #333; color: white;"><span style="color: var(--color-primary) !important; font-weight: bold;">PUT</span> http://www.sapi.host/personal</p>
+      <br>
+      <div class="mb-4 mt-2">
+        <h5 class="d-inline">HTTP Request Description:</h5>
+        <span>
+          The PUT request will be able to modify and update an existing record with the provided ID.
+        </span>
+      </div>
+      <div class="mb-3">
+        <h5 class="d-inline-block">Request Body Data:</h5>
+        <span>
+          JSON object of data you want to modify the target record with.
+        </span>
+      </div>
+      <div>
+        <h5 class="d-inline-block">Response Headers:</h5> <p class="api-link">Content-Type: application/json</p>
+      </div>
+      <h5>Query Parameters</h5>
+      <p>NOTE: None of these parameters are required in this API call.</p>
+      <table class="parameters-table">
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Example</th>
+            <th>Default</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><span class="api-link">apikey</span></td>
+            <td>string</td>
+            <td>No example available</td>
+            <td>null</td>
+            <td>Yes</td>
+            <td>This is the only form of authentication for this API. If you do not have one, please get one <a href="/get-api-key/">here</a></td>
+          </tr>
+          <tr>
+            <td><span class="api-link">id</span></td>
+            <td>string</td>
+            <td>No example available</td>
+            <td>null</td>
+            <td>Yes</td>
+            <td>This is the ID of the record that you want to modify.</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class=mt-4>Example API Call</h5>
+      <p class="api-link" style="background-color: #333; color: white;"><span style="color: var(--color-primary) !important; font-weight: bold;">PUT</span> http://www.sapi.host/api/products/?apikey={apikey}&provider=safeway&limit=50</p>
+    </div>
+    <div class="request-type delete">
+      <h2>DELETE Request</h2>
+      <p class="api-link" style="background-color: #333; color: white;"><span style="color: var(--color-primary) !important; font-weight: bold;">DELETE</span> http://www.sapi.host/personal</p>
+      <br>
+      <div class="mb-4 mt-2">
+        <h5 class="d-inline">HTTP Request Description:</h5>
+        <span>
+          The DELETE request will be able to delete a specific record based on the ID provided.
+        </span>
+      </div>
+      <div class="mb-3">
+        <h5 class="d-inline-block">Request Body Data:</h5>
+        <span>
+          No request body data required.
+        </span>
+      </div>
+      <div>
+        <h5 class="d-inline-block">Response Headers:</h5> <p class="api-link">Content-Type: application/json</p>
+      </div>
+      <h5>Query Parameters</h5>
+      <p>NOTE: None of these parameters are required in this API call.</p>
+      <table class="parameters-table">
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Example</th>
+            <th>Default</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><span class="api-link">apikey</span></td>
+            <td>string</td>
+            <td>No example available</td>
+            <td>null</td>
+            <td>Yes</td>
+            <td>This is the only form of authentication for this API. If you do not have one, please get one <a href="/get-api-key/">here</a></td>
+          </tr>
+          <tr>
+            <td><span class="api-link">id</span></td>
+            <td>string</td>
+            <td>No example available</td>
+            <td>null</td>
+            <td>Yes</td>
+            <td>This is the ID of the record that you want to delete.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 class=mt-4>Example API Call</h5>
+      <p class="api-link" style="background-color: #333; color: white;"><span style="color: var(--color-primary) !important; font-weight: bold;">DELETE</span> http://www.sapi.host/api/products/?apikey={apikey}&provider=safeway&limit=50</p>
+    </div>
+  </div>
+{% endblock %}

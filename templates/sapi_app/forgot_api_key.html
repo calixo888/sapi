@@ -1,0 +1,24 @@
+{% extends 'sapi_app/base.html' %}
+{% load staticfiles %}
+{% block head %}
+  <title>SAPI - Lost Your API Key?</title>
+  <link rel="stylesheet" href="{% static 'sapi_app/api_key.css' %}">
+  <meta name="description" content="Forgot your API key? No problem. We got you covered.">
+{% endblock %}
+{% block body %}
+  <div class="container text-center">
+    <h1>Forgot API key</h1>
+    <div class="my-4"></div>
+    <p class="w-50 m-auto">
+      Forgot your API Key? No problem! Just enter the email you submitted when getting the API key initially and it will be sent to you immediately.
+    </p>
+    <div class="my-4"></div>
+    <form class="w-50 m-auto" enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+      <div class="input-grid">
+        <input class="form-control" type="email" name="email" placeholder="Email" required>
+        <input class="btn btn-outline-success" type="submit" value="Get my API Key!">
+      </div>
+    </form>
+  </div>
+{% endblock %}
